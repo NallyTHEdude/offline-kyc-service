@@ -1,1 +1,1 @@
-# offline-kyc-servic
+# Offline KYC Verification Service
