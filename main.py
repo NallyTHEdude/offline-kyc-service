@@ -1,4 +1,4 @@
-import src.app as app
+import uvicorn
 
 if __name__ == "__main__":
-    app.start()
+    uvicorn.run("src.app:app", host="localhost", port=8000, reload=True)
