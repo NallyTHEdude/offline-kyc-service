@@ -1,4 +1,5 @@
 import uvicorn
+from src import env_config
 
 if __name__ == "__main__":
-    uvicorn.run("src.app:app", host="localhost", port=8000, reload=True)
+    uvicorn.run("src.app:app", host=env_config.HOST, port=env_config.PORT, reload=True)
