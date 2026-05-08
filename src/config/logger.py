@@ -29,7 +29,7 @@ if env_config.ENV == "dev":
 else:
     Path("logs").mkdir(exist_ok=True)
     logger.add(
-        "logs/app.logs",
+        "logs/app.log",
         level="INFO",
         rotation="10 MB",
         retention="7 days",
