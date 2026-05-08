@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from src import healthCheckRouter
-from src import ApiResponse
+from src.routes import *
+from src.utils import ApiResponse
 
 app = FastAPI()
 
