@@ -1,5 +1,5 @@
 from fastapi import APIRouter 
-from src.utils import ApiResponse
+from src.schemas import ApiResponse
 
 router = APIRouter()
 
