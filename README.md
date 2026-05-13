@@ -61,7 +61,9 @@ The service exposes the following API endpoints:
 - **Response**:
   ```json
   {
-    "status": "OK"
+    "success": true,
+    "status_code"=200,
+    "message"="Service is healthy"
   }
   ```
 
