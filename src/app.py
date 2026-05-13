@@ -7,6 +7,7 @@ app = FastAPI()
 # INCLUDE ROUTERS
 api_prefix="/api"
 app.include_router(healthCheckRouter, prefix=api_prefix)
+app.include_router(uploadFileRouter, prefix=api_prefix)
 
 
 # ROOT ENDPOINT
