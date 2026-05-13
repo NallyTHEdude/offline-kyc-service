@@ -1,2 +1,2 @@
-from src.core.upload_file_service import get_qr_data, get_image_data
-__all__ = ["get_qr_data", "get_image_data"]
+from src.core.upload_file_service import compare_qr_data_with_image_data
+__all__ = ["compare_qr_data_with_image_data"]
