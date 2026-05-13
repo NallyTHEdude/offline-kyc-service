@@ -1,5 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from src.core import *
+from src.schemas import ApiResponse
 from src.config import logger
 
 router = APIRouter()
@@ -13,7 +14,16 @@ async def upload_file(file: UploadFile = File(...)):
     with open(file.filename, "wb") as f:
         f.write(await file.read())
     
-    qr_data = get_qr_data(file.filename)
-    logger.info("QR Data extracted: %s", qr_data)
-    image_data = get_image_data(file.filename)
-    return qr_data
+    verification_status = compare_qr_data_with_image_data(file.filename)
+    return ApiResponse(
+        success=True,
+        status_code=200,
+        message="Adhaar Verified Successfully" if verification_status["verified"] else "Adhaar verification failed",
+        data = {
+            "name_match": verification_status["name_match"],
+            "dob_match": verification_status["dob_match"],
+            "gender_match": verification_status["gender_match"],
+            "verified": verification_status["verified"],
+        }
+
+    )
