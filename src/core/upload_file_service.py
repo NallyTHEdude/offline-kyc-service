@@ -2,6 +2,7 @@ import cv2
 import gzip
 from pyzbar.pyzbar import decode
 from src.config import logger
+from src.utils import ApiResponse, ApiError
 import re
 
 
@@ -16,7 +17,15 @@ def get_qr_data(image_path):
             raise ValueError("No QR code detected in the image.")
     except Exception as e:
         logger.error("Error in get_qr_data: {}", str(e))
-        return None
+        return ApiError(
+            success=False,
+            status_code=400,
+            message="Failed to extract QR code data.",
+            details= ApiError.ErrorDetails(
+                error="QRExtractionError",
+                description="Could Not Extract QR data from the image. Error: {}".format(str(e))
+            )
+        )
     
 # TODO: IMPLEMEMT OCR to extract text data from image if QR code is not detected
 def get_image_data(image_path):
@@ -60,9 +69,16 @@ def _extract_data(decoded_qr_str):
         if re.fullmatch(r"XXXXXX\d{4}", value):
             phone_no = value
             break
-    return {
+    data =  {
         "name": decoded_parts[3],
         "dob": decoded_parts[4],
         "gender": decoded_parts[5],
         "phone_no": phone_no
     }
+
+    return ApiResponse(
+            success=True,
+            status_code=200,
+            message="QR code data extracted successfully.",
+            data=data
+        )
