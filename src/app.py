@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from src.routes import *
-from src.utils import ApiResponse
+from src.schemas import ApiResponse
 
 app = FastAPI()
 
